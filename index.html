@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Camino a los 10K 🏃‍♀️✨</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mi Camino a los 21K - Mar del Plata 🏃‍♀️✨</title>
     <!-- Tailwind CSS for minimalist pastel styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -37,7 +37,7 @@
             color: theme('colors.pastel.text');
         }
         
-        /* Custom Checkbox Styling */
+        /* Custom Checkbox Styling - Modificado para tilde verde */
         .day-checkbox {
             appearance: none;
             width: 1.5rem;
@@ -52,23 +52,25 @@
         }
 
         .day-checkbox:checked {
-            background-color: theme('colors.pastel.accent');
+            background-color: white;
+            border-color: #22c55e; /* Borde verde al tildar */
         }
 
         .day-checkbox:checked::after {
             content: '✓';
             position: absolute;
-            color: white;
-            font-size: 1rem;
+            color: #22c55e; /* Tilde verde */
+            font-size: 1.25rem;
             font-weight: bold;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
 
+        /* Suavizado el efecto de completado para mejor legibilidad en mobile */
         .card-completed {
-            opacity: 0.6;
-            filter: grayscale(30%);
+            opacity: 0.7;
+            filter: grayscale(15%);
         }
 
         .progress-bar-fill {
@@ -79,40 +81,37 @@
 <body class="antialiased min-h-screen pb-12">
 
     <!-- Header & Progress Section -->
-    <header class="max-w-4xl mx-auto pt-10 px-6 pb-6 text-center">
-        <h1 class="text-4xl font-semibold mb-2">Mi Camino a los 10K 🏃‍♀️✨</h1>
-        <p class="text-lg text-gray-500 mb-6">La disciplina no siempre es cómoda, divertida, pero es la que te hace mejorar, día tras día.
-                                              Es salir cuando no tenes ganas, es repetir aunque aburra, es seguir aunque no veas resultados inmediatos.
-                                              Muchos empiezan. Pocos continúan. La diferencia es la disciplina.
-                                              No brilla como una medalla, pero es la que la gana.</p>
-        <!--<p class="text-lg text-gray-500 mb-6">Un plan progresivo y tranquilo para sumar distancia. ¡Disfruta el proceso!</p>/-->
+    <header class="max-w-4xl mx-auto pt-8 px-4 sm:pt-10 sm:px-6 pb-4 sm:pb-6 text-center">
+        <h1 class="text-3xl sm:text-4xl font-semibold mb-3">Mi Camino a los 21K - Mar del Plata 🏃‍♀️✨</h1>
+        <p class="text-sm sm:text-lg text-gray-500 mb-6 px-2">
+            Toda la experiencia previa en maratones y trail te trajo hasta acá, pero la disciplina diaria es la que te llevará a la meta.
+            Es salir cuando no tenés ganas, es repetir aunque aburra, es seguir aunque no veas resultados inmediatos.
+            Muchos empiezan. Pocos continúan. ¡A por esos 21K!
+        </p>
         
-        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-8">
+        <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-gray-100 mb-6 sm:mb-8">
             <div class="flex justify-between items-center mb-2">
-                <span class="font-medium text-pastel-text">Progreso del Entrenamiento</span>
-                <span id="progress-text" class="font-bold text-pastel-accent">0%</span>
+                <span class="font-medium text-pastel-text text-sm sm:text-base">Progreso del Entrenamiento</span>
+                <span id="progress-text" class="font-bold text-pastel-accent text-sm sm:text-base">0%</span>
             </div>
-            <div class="w-full bg-gray-100 rounded-full h-4 overflow-hidden">
-                <div id="progress-bar" class="progress-bar-fill bg-pastel-accent h-4 rounded-full" style="width: 0%"></div>
+            <div class="w-full bg-gray-100 rounded-full h-3 sm:h-4 overflow-hidden">
+                <div id="progress-bar" class="progress-bar-fill bg-pastel-accent h-3 sm:h-4 rounded-full" style="width: 0%"></div>
             </div>
-            <p class="text-sm mt-3 text-gray-500 text-left">Días completados: <span id="days-completed">0</span> / <span id="total-days">0</span></p>
+            <p class="text-xs sm:text-sm mt-3 text-gray-500 text-left">Días completados: <span id="days-completed">0</span> / <span id="total-days">0</span></p>
         </div>
     </header>
 
     <!-- Training Plan Container -->
-    <main id="plan-container" class="max-w-4xl mx-auto px-6 space-y-8">
+    <main id="plan-container" class="max-w-4xl mx-auto px-4 sm:px-6 space-y-6 sm:space-y-8">
         <!-- Javascript will inject weeks here -->
     </main>
 
     <script>
-        // Entrenamientos recurrentes (plantillas) para facilitar lectura
         const TREN_INFERIOR = "Gimnasio: Tren Inferior (Fuerza de piernas y glúteos).";
         const TREN_SUPERIOR = "Gimnasio: Tren Superior + Core.";
         const BICI_SUAVE = "Bicicleta suave (30-40 min) para soltar piernas.";
         const DESCANSO = "Descanso total. ¡Recuperar es parte de entrenar!";
 
-        // Estructura de datos del plan de entrenamiento
-        // Mes 1: En minutos. Mes 2 en adelante: En horas.
         const planData = [
             {
                 weekNumber: 1,
@@ -254,77 +253,76 @@
                     { id: "w11-d4", day: "Jueves", label: "Descanso 💆‍♀️🍺", desc: "Descanso total.", bg: "bg-pastel-gray" },
                     { id: "w11-d5", day: "Viernes", label: "Caminata 🚶‍♀️‍➡️", desc: "Caminata ligera de 20 min, hidratar bien y preparar ropa.", bg: "bg-pastel-yellow" },
                     { id: "w11-d6", day: "Sábado", label: "Descanso 💆‍♀️🍺", desc: "Descanso pre-carrera. ¡Mentalízate y duerme bien!", bg: "bg-pastel-gray" },
-                    { id: "w11-d7", day: "Domingo", label: "¡DÍA DE CARRERA! 🏃‍♀️‍➡️🏅", desc: "¡A disfrutar esos 10K! Corre a tu ritmo, sonríe en la meta.", bg: "bg-pastel-pink text-gray-800 border-2 border-pastel-accent" },
-                    /*{ id: "w11-d8", day: "Lunes 09/11", label: "¡DÍA DE CARRERA!", desc: "¡A disfrutar esos 10K! Corre a tu ritmo, sonríe en la meta.", bg: "bg-pastel-pink text-gray-800 border-2 border-pastel-accent" }*/
+                    { id: "w11-d7", day: "Domingo", label: "¡DÍA DE CARRERA! 🏃‍♀️‍➡️🏅", desc: "¡A disfrutar esos 21K! Corre a tu ritmo, sonríe en la meta.", bg: "bg-pastel-pink text-gray-800 border-2 border-pastel-accent" }
                 ]
             }
         ];
 
         let totalActiveDays = 0;
-        let savedProgress = JSON.parse(localStorage.getItem('runProgress_10k')) || {};
-        let savedEmojis = JSON.parse(localStorage.getItem('runEmojis_10k')) || {};
+        let savedProgress = JSON.parse(localStorage.getItem('runProgress_21k')) || {};
+        let savedEmojis = JSON.parse(localStorage.getItem('runEmojis_21k')) || {};
 
         document.addEventListener('DOMContentLoaded', () => {
             const container = document.getElementById('plan-container');
 
             planData.forEach(week => {
-                // Contenedor de semana
                 const weekDiv = document.createElement('div');
                 weekDiv.className = 'bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden';
                 
-                // Cabecera de semana
                 const weekHeader = document.createElement('div');
-                weekHeader.className = 'bg-gray-50 px-6 py-4 border-b border-gray-100 flex justify-between items-center';
+                weekHeader.className = 'bg-gray-50 px-4 py-3 sm:px-6 sm:py-4 border-b border-gray-100 flex justify-between items-center';
                 weekHeader.innerHTML = `
-                    <h2 class="text-xl font-semibold">Semana ${week.weekNumber}</h2>
-                    <span class="text-sm text-gray-500">${week.dateRange}</span>
+                    <h2 class="text-lg sm:text-xl font-semibold">Semana ${week.weekNumber}</h2>
+                    <span class="text-xs sm:text-sm text-gray-500">${week.dateRange}</span>
                 `;
                 weekDiv.appendChild(weekHeader);
 
-                // Grid de días
                 const daysDiv = document.createElement('div');
-                daysDiv.className = 'p-6 grid grid-cols-1 md:grid-cols-2 gap-4';
+                daysDiv.className = 'p-4 sm:p-6 grid grid-cols-1 md:grid-cols-2 gap-4';
 
                 week.days.forEach(day => {
-                    totalActiveDays++; // Contamos todos los días (incluso descanso para hábito)
+                    totalActiveDays++;
 
                     const isChecked = savedProgress[day.id] ? 'checked' : '';
                     const completedClass = isChecked ? 'card-completed' : '';
                     const currentEmoji = savedEmojis[day.id] || '';
                     
                     const dayCard = document.createElement('div');
-                    dayCard.className = `flex items-start gap-4 p-4 rounded-xl transition-all duration-300 ${day.bg} ${completedClass}`;
+                    // Ajuste de layout para mobile: flex y espaciados mejorados
+                    dayCard.className = `flex items-start gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl transition-all duration-300 ${day.bg} ${completedClass}`;
                     dayCard.id = `card-${day.id}`;
                     
                     dayCard.innerHTML = `
                         <div class="flex-shrink-0 mt-1">
                             <input type="checkbox" id="${day.id}" class="day-checkbox" ${isChecked} onchange="toggleDay('${day.id}')">
                         </div>
-                        <div class="flex-1 w-full">
-                            <div class="flex items-center gap-2 mb-1">
-                                <label for="${day.id}" class="font-semibold text-lg cursor-pointer">${day.day}</label>
+                        <div class="flex-1 w-full min-w-0"> <!-- min-w-0 previene overflow en flex -->
+                            <div class="flex items-center gap-2 mb-1 flex-wrap">
+                                <label for="${day.id}" class="font-semibold text-base sm:text-lg cursor-pointer">${day.day}</label>
                                 <span class="text-xs font-medium px-2 py-1 bg-white bg-opacity-50 rounded-full">${day.label}</span>
                             </div>
-                            <p class="text-sm cursor-pointer mb-3" onclick="document.getElementById('${day.id}').click()">${day.desc}</p>
+                            <p class="text-xs sm:text-sm cursor-pointer mb-3 leading-relaxed" onclick="document.getElementById('${day.id}').click()">${day.desc}</p>
                             
-                            <!-- Botones Emoji -->
-                            <div class="flex items-center gap-2 bg-white bg-opacity-40 p-2 rounded-lg w-max" onclick="event.stopPropagation()">
-                                <span class="text-xs text-gray-600 mr-2 font-medium">¿Cómo te sentiste?</span>
+                            <!-- Botones Emoji adaptados a Mobile -->
+                            <div class="flex flex-wrap items-center gap-2 bg-white bg-opacity-40 p-2 sm:px-3 sm:py-2 rounded-lg w-full sm:w-max mt-2" onclick="event.stopPropagation()">
+                                <span class="text-xs text-gray-600 mr-1 sm:mr-2 font-medium w-full sm:w-auto mb-1 sm:mb-0">¿Cómo te sentiste?</span>
                                 
-                                <label class="relative cursor-pointer flex items-center justify-center">
-                                    <input type="radio" name="estado_${day.id}" value="bien" class="hidden peer" onchange="saveEmoji('${day.id}', 'bien')" ${currentEmoji === 'bien' ? 'checked' : ''}>
-                                    <span class="block text-2xl opacity-40 hover:opacity-70 peer-checked:opacity-100 peer-checked:scale-110 peer-checked:bg-pastel-green rounded-full px-1 transition-all duration-200">😃</span>
-                                </label>
+                                <div class="flex items-center gap-3">
+                                    <label class="relative cursor-pointer flex items-center justify-center">
+                                        <input type="radio" name="estado_${day.id}" value="bien" class="hidden peer" onchange="saveEmoji('${day.id}', 'bien')" ${currentEmoji === 'bien' ? 'checked' : ''}>
+                                        <span class="block text-xl sm:text-2xl opacity-40 hover:opacity-70 peer-checked:opacity-100 peer-checked:scale-110 peer-checked:bg-pastel-green rounded-full px-1 transition-all duration-200">😃</span>
+                                    </label>
 
-                                <label class="relative cursor-pointer flex items-center justify-center">
-                                    <input type="radio" name="estado_${day.id}" value="regular" class="hidden peer" onchange="saveEmoji('${day.id}', 'regular')" ${currentEmoji === 'regular' ? 'checked' : ''}>
-                                    <span class="block text-2xl opacity-40 hover:opacity-70 peer-checked:opacity-100 peer-checked:scale-110 peer-checked:bg-pastel-yellow rounded-full px-1 transition-all duration-200">😐</span>
-                                </label>
+                                    <label class="relative cursor-pointer flex items-center justify-center">
+                                        <input type="radio" name="estado_${day.id}" value="regular" class="hidden peer" onchange="saveEmoji('${day.id}', 'regular')" ${currentEmoji === 'regular' ? 'checked' : ''}>
+                                        <span class="block text-xl sm:text-2xl opacity-40 hover:opacity-70 peer-checked:opacity-100 peer-checked:scale-110 peer-checked:bg-pastel-yellow rounded-full px-1 transition-all duration-200">😐</span>
+                                    </label>
 
-                                <label class="relative cursor-pointer flex items-center justify-center">
-                                    <input type="radio" name="estado_${day.id}" value="mal" class="hidden peer" onchange="saveEmoji('${day.id}', 'mal')" ${currentEmoji === 'mal' ? 'checked' : ''}>
-                                    <span class="block text-2xl opacity-40 hover:opacity-70 peer-checked:opacity-100 peer-checked:scale-110 peer-checked:bg-pastel-accent rounded-full px-1 transition-all duration-200">😞</span>
-                                </label>
+                                    <label class="relative cursor-pointer flex items-center justify-center">
+                                        <input type="radio" name="estado_${day.id}" value="mal" class="hidden peer" onchange="saveEmoji('${day.id}', 'mal')" ${currentEmoji === 'mal' ? 'checked' : ''}>
+                                        <span class="block text-xl sm:text-2xl opacity-40 hover:opacity-70 peer-checked:opacity-100 peer-checked:scale-110 peer-checked:bg-pastel-accent rounded-full px-1 transition-all duration-200">😞</span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     `;
@@ -339,13 +337,12 @@
             updateProgress();
         });
 
-        // Función para tachar el día y guardar en LocalStorage
         function toggleDay(dayId) {
             const checkbox = document.getElementById(dayId);
             const card = document.getElementById(`card-${dayId}`);
             
             savedProgress[dayId] = checkbox.checked;
-            localStorage.setItem('runProgress_10k', JSON.stringify(savedProgress));
+            localStorage.setItem('runProgress_21k', JSON.stringify(savedProgress));
 
             if(checkbox.checked) {
                 card.classList.add('card-completed');
@@ -356,13 +353,11 @@
             updateProgress();
         }
 
-        // Función para guardar el estado del emoji en LocalStorage
         function saveEmoji(dayId, status) {
             savedEmojis[dayId] = status;
-            localStorage.setItem('runEmojis_10k', JSON.stringify(savedEmojis));
+            localStorage.setItem('runEmojis_21k', JSON.stringify(savedEmojis));
         }
 
-        // Calcular y actualizar barra de progreso
         function updateProgress() {
             const completedCount = Object.values(savedProgress).filter(val => val === true).length;
             document.getElementById('days-completed').innerText = completedCount;
